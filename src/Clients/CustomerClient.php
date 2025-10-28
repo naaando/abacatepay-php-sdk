@@ -24,7 +24,7 @@ class CustomerClient extends Client
      *
      * @param GuzzleHttpClient|null $client Optional GuzzleHttpClient instance for custom configurations.
      */
-    public function __construct(GuzzleHttpClient $client = null)
+    public function __construct(?GuzzleHttpClient $client = null)
     {
         parent::__construct(self::URI, $client);
     }
