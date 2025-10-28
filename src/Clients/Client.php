@@ -40,7 +40,7 @@ class Client
      * @param string $uri The specific API endpoint to interact with.
      * @param GuzzleHttpClient|null $client Optional GuzzleHttpClient instance for custom configurations.
      */
-    public function __construct(string $uri, GuzzleHttpClient $client = null)
+    public function __construct(string $uri, ?GuzzleHttpClient $client = null)
     {
         $this->client = $client ?? new GuzzleHttpClient([
             'base_uri' => self::BASE_URI . "/" . $uri . "/",
