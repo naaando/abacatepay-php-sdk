@@ -55,9 +55,15 @@ class BillingClient extends Client
         $requestData = [
             'frequency' => $data->frequency,
             'methods' => $data->methods,
-            'products' => $data->products,
             'returnUrl' => $data->metadata->return_url,
             'completionUrl' => $data->metadata->completion_url,
+            'products' => array_map(fn($product) => [
+                'externalId' => $product->external_id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'quantity' => $product->quantity,
+                'price' => $product->price
+            ], $data->products),
         ];
 
         if (isset($data->customer)) {
