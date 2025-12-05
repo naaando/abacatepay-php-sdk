@@ -28,7 +28,7 @@ class BillingClient extends Client
     {
         parent::__construct(self::URI, $client);
     }
-    
+
     /**
      * Retrieves a list of billings.
      *
@@ -58,16 +58,9 @@ class BillingClient extends Client
             'products' => $data->products,
             'returnUrl' => $data->metadata->return_url,
             'completionUrl' => $data->metadata->completion_url,
-            'products' => array_map(fn($product) => [
-                'externalId' => $product->external_id,
-                'name' => $product->name,
-                'description' => $product->description,
-                'quantity' => $product->quantity,
-                'price' => $product->price
-            ], $data->products),
         ];
 
-        if (!isset($data->customer->id)) {
+        if (isset($data->customer) && !isset($data->customer->id)) {
             $requestData['customer'] = [
                 'name' => $data->customer->metadata->name,
                 'email' => $data->customer->metadata->email,
