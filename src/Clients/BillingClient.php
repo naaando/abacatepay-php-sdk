@@ -60,15 +60,17 @@ class BillingClient extends Client
             'completionUrl' => $data->metadata->completion_url,
         ];
 
-        if (isset($data->customer) && !isset($data->customer->id)) {
-            $requestData['customer'] = [
-                'name' => $data->customer->metadata->name,
-                'email' => $data->customer->metadata->email,
-                'cellphone' => $data->customer->metadata->cellphone,
-                'taxId' => $data->customer->metadata->tax_id
-            ];
-        } else {
-            $requestData['customerId'] = $data->customer->id;
+        if (isset($data->customer)) {
+            if (!isset($data->customer->id)) {
+                $requestData['customer'] = [
+                    'name' => $data->customer->metadata->name,
+                    'email' => $data->customer->metadata->email,
+                    'cellphone' => $data->customer->metadata->cellphone,
+                    'taxId' => $data->customer->metadata->tax_id
+                ];
+            } else {
+                $requestData['customerId'] = $data->customer->id;
+            }
         }
 
         $response = $this->request("POST", "create", [
