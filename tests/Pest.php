@@ -68,3 +68,13 @@ function getCreateCustomerResponseClient(): Client
 {
     return createMockClient('Customer/create');
 }
+
+/**
+ * Creates a mock client with a predefined response for creating a Pix QRCode.
+ *
+ * @return Client The mock Guzzle HTTP client.
+ */
+function getCreatePixQrCodeResponseClient(): Client
+{
+    return createMockClient('PixQrCode/create');
+}
